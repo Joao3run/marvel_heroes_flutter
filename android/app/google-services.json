@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "134020349653",
+    "project_id": "marvel-heroes-flutter",
+    "storage_bucket": "marvel-heroes-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134020349653:android:0efafe82001bc97e86ec5c",
+        "android_client_info": {
+          "package_name": "br.com.brn.marvel_heroes_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134020349653-v0fpqknk9vjq7ekovvicg9fm2dlfqng5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.brn.marvel_heroes_flutter",
+            "certificate_hash": "f9d0e7aafe4fbaa8d53202c625e808891b2ac56f"
+          }
+        },
+        {
+          "client_id": "134020349653-9180m0b5d0veo1r33p9cn6525ilq2d9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3zk34XE7wrz7a0OiTMG6xdRkOHFd3ZiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134020349653-9180m0b5d0veo1r33p9cn6525ilq2d9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
