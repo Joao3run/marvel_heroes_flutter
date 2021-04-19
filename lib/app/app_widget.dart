@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:marvel_heroes_flutter/app/shared/utils/app_colors.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -8,9 +9,10 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Heroes Marvel',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        brightness: Brightness.dark,
+        primaryColor: AppColors.PRIMARY_COLOR,
       ),
-      initialRoute: '/public/splash',
+      initialRoute: '/',
     ).modular();
   }
 }

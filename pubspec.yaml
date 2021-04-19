@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_modular: ^3.1.0
   firebase_core: "^1.0.3"
+  flutter_svg: ^0.20.0-nullsafety.3
 
 
 dev_dependencies:
@@ -23,12 +24,13 @@ dev_dependencies:
 
 flutter:
 
-  
+
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/img
+    - assets/img/
+#    - assets/fonts
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
