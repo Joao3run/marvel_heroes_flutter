@@ -1,12 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:marvel_heroes_flutter/app/modules/home/home_modele.dart';
 import 'package:marvel_heroes_flutter/app/modules/login/login_module.dart';
+import 'package:marvel_heroes_flutter/app/modules/register/register_controller.dart';
 import 'package:marvel_heroes_flutter/app/modules/register/register_module.dart';
+import 'package:marvel_heroes_flutter/app/modules/reset_login/reset_login_module.dart';
+import 'package:marvel_heroes_flutter/app/modules/splash/splash_controller.dart';
 import 'package:marvel_heroes_flutter/app/modules/splash/splash_page.dart';
+import 'package:marvel_heroes_flutter/app/shared/controller/auth/auth_controller.dart';
+import 'package:marvel_heroes_flutter/app/shared/repositories/auth/auth_repository.dart';
 
 class AppModule extends Module {
   @override
-  final List<Bind> binds = [];
+  final List<Bind> binds = [
+    Bind.lazySingleton((i) => SplashController()),
+    Bind.lazySingleton((i) => RegisterController()),
+    Bind<AuthController>((i) => AuthController()),
+    Bind.lazySingleton<AuthRepository>(
+      (i) => AuthRepository(
+        firebaseAuth: FirebaseAuth.instance,
+        googleSignIn: GoogleSignIn(),
+      ),
+    ),
+  ];
 
   @override
   final List<ModularRoute> routes = [
@@ -17,6 +34,8 @@ class AppModule extends Module {
     ModuleRoute('/register',
         module: RegisterModule(), transition: TransitionType.fadeIn),
     ModuleRoute('/home',
-        module: HomeModule(), transition: TransitionType.fadeIn)
+        module: HomeModule(), transition: TransitionType.fadeIn),
+    ModuleRoute('/reset-login',
+        module: ResetLoginModule(), transition: TransitionType.fadeIn)
   ];
 }

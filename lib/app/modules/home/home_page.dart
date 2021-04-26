@@ -1,53 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:marvel_heroes_flutter/app/modules/home/home_controller.dart';
+import 'package:marvel_heroes_flutter/app/shared/controller/auth/auth_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return Scaffold(
-        appBar: AppBar(
-            title:Text("Wave Clipper Design"),
-            backgroundColor: Colors.redAccent
-        ),
-        body: ClipPath(
-          clipper: WavyClipper(),
-          child: Container(
-            height: size.height * 0.09,
-            width: size.width,
-            color: Colors.teal[800],
-            padding: EdgeInsets.only(top: 4),
-          ),
-        ),
-    );
-  }
+  _HomePageState createState() => _HomePageState();
 }
 
-
-class WavyClipper extends CustomClipper<Path>{
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0.0, 20);
-    var firstControlPoint = Offset(size.width / 3.25, 65);
-    var firstEndPoint = Offset(size.width / 1.75, 40);
-    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
-
-    var secondCP = Offset(size.width / 1.25, 0);
-    var secondEP = Offset(size.width, 30);
-    path.quadraticBezierTo(
-        secondCP.dx, secondCP.dy, secondEP.dx, secondEP.dy);
-
-    path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
-    path.close();
-    return path;
-  }
+class _HomePageState extends ModularState<HomePage, HomeController> {
+  final AuthController authController = Modular.get();
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            title: Text("Marvel Heroes"), backgroundColor: Colors.redAccent),
+        body: Container(
+          child: Column(
+            children: [
+              // Image.network(authController.user!.photoURL!),
+              Text(authController.user!.displayName!),
+              Text(authController.user!.email!),
+              Center(
+                child: OutlinedButton(
+                  child: Text('User'),
+                  onPressed: () {
+                    controller.getLoggedUser();
+                    print('loggof');
+                  },
+                ),
+              ),
+              Center(
+                child: OutlinedButton(
+                  child: Text('Logof'),
+                  onPressed: () {
+                    controller.signOut();
+                    print('loggof');
+                  },
+                ),
+              ),
+            ],
+          ),
+        ));
   }
-
 }
