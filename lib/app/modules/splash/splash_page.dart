@@ -15,7 +15,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends ModularState<SplashPage, SplashController> {
   @override
   void initState() {
-    controller.initializeFlutterFire();
+    controller.checkLoggedUser();
     super.initState();
   }
 

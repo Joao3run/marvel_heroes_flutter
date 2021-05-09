@@ -24,30 +24,6 @@ mixin _$SplashController on _SplashControllerBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_SplashControllerBase.error');
-
-  @override
-  bool get error {
-    _$errorAtom.reportRead();
-    return super.error;
-  }
-
-  @override
-  set error(bool value) {
-    _$errorAtom.reportWrite(value, super.error, () {
-      super.error = value;
-    });
-  }
-
-  final _$initializeFlutterFireAsyncAction =
-      AsyncAction('_SplashControllerBase.initializeFlutterFire');
-
-  @override
-  Future initializeFlutterFire() {
-    return _$initializeFlutterFireAsyncAction
-        .run(() => super.initializeFlutterFire());
-  }
-
   final _$_SplashControllerBaseActionController =
       ActionController(name: '_SplashControllerBase');
 
@@ -76,8 +52,7 @@ mixin _$SplashController on _SplashControllerBase, Store {
   @override
   String toString() {
     return '''
-initialized: ${initialized},
-error: ${error}
+initialized: ${initialized}
     ''';
   }
 }
