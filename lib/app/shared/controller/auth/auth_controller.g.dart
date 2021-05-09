@@ -88,6 +88,17 @@ mixin _$AuthController on _AuthControllerBase, Store {
   }
 
   @override
+  void sendPasswordResetEmail(String email) {
+    final _$actionInfo = _$_AuthControllerBaseActionController.startAction(
+        name: '_AuthControllerBase.sendPasswordResetEmail');
+    try {
+      return super.sendPasswordResetEmail(email);
+    } finally {
+      _$_AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 user: ${user},
