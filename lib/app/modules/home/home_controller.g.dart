@@ -9,31 +9,52 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeControllerBase, Store {
-  final _$signOutAsyncAction = AsyncAction('_HomeControllerBase.signOut');
+  final _$characterDataWrapperAtom =
+      Atom(name: '_HomeControllerBase.characterDataWrapper');
 
   @override
-  Future signOut() {
-    return _$signOutAsyncAction.run(() => super.signOut());
+  CharacterDataWrapper? get characterDataWrapper {
+    _$characterDataWrapperAtom.reportRead();
+    return super.characterDataWrapper;
   }
 
-  final _$_HomeControllerBaseActionController =
-      ActionController(name: '_HomeControllerBase');
+  @override
+  set characterDataWrapper(CharacterDataWrapper? value) {
+    _$characterDataWrapperAtom.reportWrite(value, super.characterDataWrapper,
+        () {
+      super.characterDataWrapper = value;
+    });
+  }
+
+  final _$loadingAtom = Atom(name: '_HomeControllerBase.loading');
 
   @override
-  void getLoggedUser() {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.getLoggedUser');
-    try {
-      return super.getLoggedUser();
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$getCharacterDataWrapperAsyncAction =
+      AsyncAction('_HomeControllerBase.getCharacterDataWrapper');
+
+  @override
+  Future getCharacterDataWrapper() {
+    return _$getCharacterDataWrapperAsyncAction
+        .run(() => super.getCharacterDataWrapper());
   }
 
   @override
   String toString() {
     return '''
-
+characterDataWrapper: ${characterDataWrapper},
+loading: ${loading}
     ''';
   }
 }

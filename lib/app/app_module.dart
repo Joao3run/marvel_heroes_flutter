@@ -9,20 +9,24 @@ import 'package:marvel_heroes_flutter/app/modules/reset_login/reset_login_module
 import 'package:marvel_heroes_flutter/app/modules/splash/splash_controller.dart';
 import 'package:marvel_heroes_flutter/app/modules/splash/splash_page.dart';
 import 'package:marvel_heroes_flutter/app/shared/controller/auth/auth_controller.dart';
+import 'package:marvel_heroes_flutter/app/shared/http/http_provider.dart';
 import 'package:marvel_heroes_flutter/app/shared/repositories/auth/auth_repository.dart';
+import 'package:marvel_heroes_flutter/app/shared/repositories/character/character_repository.dart';
 
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => SplashController()),
     Bind.lazySingleton((i) => RegisterController()),
-    Bind<AuthController>((i) => AuthController()),
     Bind.lazySingleton<AuthRepository>(
       (i) => AuthRepository(
         firebaseAuth: FirebaseAuth.instance,
         googleSignIn: GoogleSignIn(),
       ),
     ),
+    Bind<AuthController>((i) => AuthController()),
+    Bind.lazySingleton((i) => HttpProvider()),
+    Bind.lazySingleton((i) => CharacterRepository(httpProvider: i.get()))
   ];
 
   @override
