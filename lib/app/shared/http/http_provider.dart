@@ -20,6 +20,7 @@ class HttpProvider implements IHttpProvider {
       params = paramsAuth;
     }
     final urlComplete = Uri.https(baseUrl, url, params);
+    print(urlComplete);
     final response = await http.get(urlComplete);
     return json.decode(response.body);
   }

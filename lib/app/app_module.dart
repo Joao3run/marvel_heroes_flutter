@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:marvel_heroes_flutter/app/modules/home/home_modele.dart';
+import 'package:marvel_heroes_flutter/app/modules/character/character_module.dart';
+import 'package:marvel_heroes_flutter/app/modules/favorite/favorite_module.dart';
+import 'package:marvel_heroes_flutter/app/modules/home/home_module.dart';
 import 'package:marvel_heroes_flutter/app/modules/login/login_module.dart';
 import 'package:marvel_heroes_flutter/app/modules/register/register_controller.dart';
 import 'package:marvel_heroes_flutter/app/modules/register/register_module.dart';
@@ -40,6 +42,14 @@ class AppModule extends Module {
     ModuleRoute('/home',
         module: HomeModule(), transition: TransitionType.fadeIn),
     ModuleRoute('/reset-login',
-        module: ResetLoginModule(), transition: TransitionType.fadeIn)
+        module: ResetLoginModule(), transition: TransitionType.fadeIn),
+    ModuleRoute(
+      '/hero-page',
+      module: CharacterModule(),
+    ),
+    ModuleRoute(
+      '/favorite-page',
+      module: FavoriteModule(),
+    ),
   ];
 }
