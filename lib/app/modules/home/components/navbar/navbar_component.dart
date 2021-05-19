@@ -29,7 +29,7 @@ class _NavBarState extends ModularState<NavBar, NavbarController> {
           ListTile(
             leading: Icon(Icons.favorite),
             title: Text('Favorites'),
-            onTap: () => null,
+            onTap: () => controller.navigateToFavorite(),
           ),
           Divider(),
           ListTile(

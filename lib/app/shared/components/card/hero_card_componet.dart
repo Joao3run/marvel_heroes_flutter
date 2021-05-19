@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:marvel_heroes_flutter/app/shared/model/character.dart';
 
-
 class HeroCardComponent extends StatelessWidget {
-  final Character? character;
+  final Character character;
 
-  const HeroCardComponent({Key? key, required this.character}) : super(key: key);
+  const HeroCardComponent({Key? key, required this.character})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(character.name);
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -23,15 +24,15 @@ class HeroCardComponent extends StatelessWidget {
               children: [
                 Ink.image(
                   height: 400,
-                  image: NetworkImage(character!.thumbnail.nameComplete()),
+                  image: NetworkImage(character.thumbnail.nameComplete()),
                   fit: BoxFit.fitWidth,
                 ),
-                _criaNomeHeroi(context, character!.name),
+                _criaNomeHeroi(context, character.name),
               ],
             ),
             Column(
               children: [
-                _buildDescription(context, character!.description),
+                _buildDescription(context, character.description),
                 _buildButtonBar(),
               ],
             )

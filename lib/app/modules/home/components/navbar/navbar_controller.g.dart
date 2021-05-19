@@ -9,6 +9,36 @@ part of 'navbar_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$NavbarController on _NavbarControllerBase, Store {
+  final _$accountNameAtom = Atom(name: '_NavbarControllerBase.accountName');
+
+  @override
+  String get accountName {
+    _$accountNameAtom.reportRead();
+    return super.accountName;
+  }
+
+  @override
+  set accountName(String value) {
+    _$accountNameAtom.reportWrite(value, super.accountName, () {
+      super.accountName = value;
+    });
+  }
+
+  final _$accountEmailAtom = Atom(name: '_NavbarControllerBase.accountEmail');
+
+  @override
+  String get accountEmail {
+    _$accountEmailAtom.reportRead();
+    return super.accountEmail;
+  }
+
+  @override
+  set accountEmail(String value) {
+    _$accountEmailAtom.reportWrite(value, super.accountEmail, () {
+      super.accountEmail = value;
+    });
+  }
+
   final _$signOutAsyncAction = AsyncAction('_NavbarControllerBase.signOut');
 
   @override
@@ -33,7 +63,8 @@ mixin _$NavbarController on _NavbarControllerBase, Store {
   @override
   String toString() {
     return '''
-
+accountName: ${accountName},
+accountEmail: ${accountEmail}
     ''';
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:marvel_heroes_flutter/app/modules/home/components/card/hero_card_componet.dart';
 import 'package:marvel_heroes_flutter/app/modules/home/components/navbar/navbar_component.dart';
 import 'package:marvel_heroes_flutter/app/modules/home/home_controller.dart';
+import 'package:marvel_heroes_flutter/app/shared/components/card/hero_card_componet.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             return AppBar(
               title: controller.showSearch
                   ? TextField(
-                      onChanged: controller.searchHero,
+                      onChanged: controller.setQuery,
                       textInputAction: TextInputAction.go,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -70,9 +70,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             );
           } else {
             return ListView.builder(
-              itemCount: controller.characterList.length,
+              itemCount: controller.characterFiltereds.length,
               itemBuilder: (context, index) => HeroCardComponent(
-                character: controller.characterDataWrapper?.data.results[index],
+                character: controller.characterFiltereds[index],
               ),
             );
           }

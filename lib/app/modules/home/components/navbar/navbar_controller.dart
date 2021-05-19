@@ -30,5 +30,9 @@ abstract class _NavbarControllerBase with Store {
     changeAccountName(user.displayName);
     changeAccountEmail(user.email);
   }
-}
 
+  @action
+  void navigateToFavorite() {
+    Modular.to.pushNamed('/favorite-page');
+  }
+}

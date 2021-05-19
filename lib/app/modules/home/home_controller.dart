@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:marvel_heroes_flutter/app/shared/model/character.dart';
 import 'package:marvel_heroes_flutter/app/shared/model/character_data_wrapper.dart';
-import 'package:marvel_heroes_flutter/app/shared/repositories/character/character_repository.dart';
+import 'package:marvel_heroes_flutter/app/shared/repositories/character/character_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
@@ -15,17 +14,30 @@ abstract class _HomeControllerBase with Store {
   @action
   void changeShowSearch(value) => showSearch = value;
 
-  final CharacterRepository repository;
-  late var immutableCharacterList = [];
+  final ICharacterRepository repository;
+  late var immutableCharacterList;
 
   _HomeControllerBase(this.repository);
 
   @observable
-  var characterList = [];
+  ObservableList<Character> characterList = ObservableList();
 
-  changeCharacterList(value) {
-    print(value);
-    this.characterList = value;
+  @observable
+  String? query;
+
+  @computed
+  List<Character> get characterFiltereds {
+    if (query != null && query!.isNotEmpty) {
+      return characterList
+          .where((character) =>
+              character.name.toLowerCase().contains(query!.toLowerCase()))
+          .toList();
+    }
+    return characterList.toList();
+  }
+
+  changeCharacterList(List<Character> value) {
+    this.characterList = value.asObservable();
   }
 
   @observable
@@ -51,19 +63,7 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  searchHero(String value) {
-    print(value);
-    print('caino Hero');
-    if (immutableCharacterList.length > 0) {
-      var foundCharacters = immutableCharacterList
-          .where((row) => (row.name.contains(value)))
-          .toList();
-      if (foundCharacters.length > 0) {
-        changeCharacterList(foundCharacters);
-      } else {
-        characterList = immutableCharacterList;
-      }
-
-    }
+  setQuery(String value) {
+    this.query = value;
   }
 }
