@@ -18,7 +18,6 @@ class HeroCardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(character.name);
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -88,7 +87,6 @@ class HeroCardComponent extends StatelessWidget {
           color: character.favorited ? Colors.red : Colors.white,
           icon: Icon(Icons.favorite),
           onPressed: () {
-            print(character.favoritedFirebaseId);
             if (character.favorited) {
               favoriteRepository.delete(character.favoritedFirebaseId!);
             } else {

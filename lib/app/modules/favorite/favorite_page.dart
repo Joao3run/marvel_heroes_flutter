@@ -23,7 +23,6 @@ class _FavoritePageState
       appBar: AppBar(),
       body: Observer(
         builder: (_) {
-          print('LOAFIN${controller.loading}');
           if (controller.loading || controller.characterFavorited == null) {
             return Center(
               child: CircularProgressIndicator(),

@@ -46,7 +46,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       ? Icon(Icons.search)
                       : Icon(Icons.cancel),
                   onPressed: () {
-                    print(controller.showSearch);
                     if (controller.showSearch == false) {
                       controller.changeShowSearch(true);
                       controller.changeShowSearchIcon(false);

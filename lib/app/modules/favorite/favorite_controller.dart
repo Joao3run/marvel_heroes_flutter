@@ -24,7 +24,6 @@ abstract class _FavoriteControllerBase with Store {
   @action
   getFavoriteHeroes() {
     this.loading = true;
-    print('getFavoriteHeroes');
   }
 
   showLoading() => this.loading = true;
@@ -32,7 +31,6 @@ abstract class _FavoriteControllerBase with Store {
   hideLoading() => this.loading = false;
 
   changeFavoriteList(List<Character> list) {
-    print(list[0].favorited);
     this.characterList = list.asObservable();
   }
 
@@ -48,9 +46,6 @@ abstract class _FavoriteControllerBase with Store {
     List<Character> list = response.data.results;
     List<Character> listFavorite = [];
     List<FavoriteHero> favoritedId = await repository.findAllFavorite();
-    print(favoritedId[0].favoriteHeroId);
-    print(favoritedId[0].id);
-    print(list[0].id);
     for (var favorite in favoritedId) {
       for (var hero in list) {
         if (favorite.favoriteHeroId == hero.id) {

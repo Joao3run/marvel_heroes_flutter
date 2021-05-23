@@ -24,17 +24,17 @@ abstract class _SplashControllerBase with Store {
     Modular.to.pushReplacementNamed("/home");
   }
 
-
   void checkLoggedUser() {
-    print('${authController.status}');
     User user = authController.getLoggedUser()!;
-    Timer(Duration(seconds: 2), () {
-      if (user.email != null) {
-        redirectToHome();
-      } else {
-        redirectToLogi();
-      }
-    },);
-
+    Timer(
+      Duration(seconds: 2),
+      () {
+        if (user.email != null) {
+          redirectToHome();
+        } else {
+          redirectToLogi();
+        }
+      },
+    );
   }
 }
