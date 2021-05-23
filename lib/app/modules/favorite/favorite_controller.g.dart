@@ -17,6 +17,21 @@ mixin _$FavoriteController on _FavoriteControllerBase, Store {
               name: '_FavoriteControllerBase.characterFavorited'))
       .value;
 
+  final _$loadingAtom = Atom(name: '_FavoriteControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$characterListAtom =
       Atom(name: '_FavoriteControllerBase.characterList');
 
@@ -31,6 +46,24 @@ mixin _$FavoriteController on _FavoriteControllerBase, Store {
     _$characterListAtom.reportWrite(value, super.characterList, () {
       super.characterList = value;
     });
+  }
+
+  final _$listAllFavoriteHerosAsyncAction =
+      AsyncAction('_FavoriteControllerBase.listAllFavoriteHeros');
+
+  @override
+  Future listAllFavoriteHeros() {
+    return _$listAllFavoriteHerosAsyncAction
+        .run(() => super.listAllFavoriteHeros());
+  }
+
+  final _$getCharacterDataWrapperAsyncAction =
+      AsyncAction('_FavoriteControllerBase.getCharacterDataWrapper');
+
+  @override
+  Future getCharacterDataWrapper() {
+    return _$getCharacterDataWrapperAsyncAction
+        .run(() => super.getCharacterDataWrapper());
   }
 
   final _$_FavoriteControllerBaseActionController =
@@ -50,6 +83,7 @@ mixin _$FavoriteController on _FavoriteControllerBase, Store {
   @override
   String toString() {
     return '''
+loading: ${loading},
 characterList: ${characterList},
 characterFavorited: ${characterFavorited}
     ''';

@@ -73,6 +73,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               itemCount: controller.characterFiltereds.length,
               itemBuilder: (context, index) => HeroCardComponent(
                 character: controller.characterFiltereds[index],
+                favoriteRepository: controller.favoriteRepository,
+                refrash: controller.refrashList,
               ),
             );
           }

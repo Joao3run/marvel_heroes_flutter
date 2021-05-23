@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 
 import 'package:marvel_heroes_flutter/app/shared/model/thumbnail.dart';
 import 'package:marvel_heroes_flutter/app/shared/model/urls.dart';
@@ -18,6 +16,8 @@ class Character {
   Thumbnail thumbnail;
   ComicList comics;
   EventList events;
+  bool favorited = false;
+  String? favoritedFirebaseId;
 
   Character({
     required this.id,

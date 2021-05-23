@@ -1,6 +1,8 @@
 import 'package:marvel_heroes_flutter/app/shared/model/character.dart';
 import 'package:marvel_heroes_flutter/app/shared/model/character_data_wrapper.dart';
+import 'package:marvel_heroes_flutter/app/shared/model/favorite_hero.dart';
 import 'package:marvel_heroes_flutter/app/shared/repositories/character/character_repository_interface.dart';
+import 'package:marvel_heroes_flutter/app/shared/repositories/favorite/favorite_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
@@ -14,10 +16,12 @@ abstract class _HomeControllerBase with Store {
   @action
   void changeShowSearch(value) => showSearch = value;
 
+  final IFavoriteRepository favoriteRepository;
+
   final ICharacterRepository repository;
   late var immutableCharacterList;
 
-  _HomeControllerBase(this.repository);
+  _HomeControllerBase(this.repository, this.favoriteRepository);
 
   @observable
   ObservableList<Character> characterList = ObservableList();
@@ -58,7 +62,18 @@ abstract class _HomeControllerBase with Store {
     final response = await this.repository.get(null);
     this.characterDataWrapper = response;
     this.immutableCharacterList = response.data.results;
-    changeCharacterList(response.data.results);
+
+    List<FavoriteHero> favoritedId = await favoriteRepository.findAllFavorite();
+    for (var favorite in favoritedId) {
+      for (var hero in immutableCharacterList) {
+        if (favorite.favoriteHeroId == hero.id) {
+          hero.favoritedFirebaseId = favorite.id;
+          hero.favorited = true;
+        }
+      }
+    }
+
+    changeCharacterList(immutableCharacterList);
     this.loading = false;
   }
 
@@ -66,4 +81,7 @@ abstract class _HomeControllerBase with Store {
   setQuery(String value) {
     this.query = value;
   }
+
+  @action
+  void refrashList() => getCharacterDataWrapper();
 }

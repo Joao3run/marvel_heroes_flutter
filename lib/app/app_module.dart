@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,6 +15,7 @@ import 'package:marvel_heroes_flutter/app/shared/controller/auth/auth_controller
 import 'package:marvel_heroes_flutter/app/shared/http/http_provider.dart';
 import 'package:marvel_heroes_flutter/app/shared/repositories/auth/auth_repository.dart';
 import 'package:marvel_heroes_flutter/app/shared/repositories/character/character_repository.dart';
+import 'package:marvel_heroes_flutter/app/shared/repositories/favorite/favorite_repository.dart';
 
 class AppModule extends Module {
   @override
@@ -28,7 +30,9 @@ class AppModule extends Module {
     ),
     Bind<AuthController>((i) => AuthController()),
     Bind.lazySingleton((i) => HttpProvider()),
-    Bind.lazySingleton((i) => CharacterRepository(httpProvider: i.get()))
+    Bind.lazySingleton((i) => CharacterRepository(httpProvider: i.get())),
+    Bind.lazySingleton((i) =>
+        FavoriteRepository(firebaseFirestore: FirebaseFirestore.instance))
   ];
 
   @override

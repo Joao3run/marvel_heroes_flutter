@@ -61,6 +61,17 @@ mixin _$NavbarController on _NavbarControllerBase, Store {
   }
 
   @override
+  void navigateToFavorite() {
+    final _$actionInfo = _$_NavbarControllerBaseActionController.startAction(
+        name: '_NavbarControllerBase.navigateToFavorite');
+    try {
+      return super.navigateToFavorite();
+    } finally {
+      _$_NavbarControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 accountName: ${accountName},

@@ -13,16 +13,18 @@ class _FavoritePageState
     extends ModularState<FavoritePage, FavoriteController> {
   @override
   void initState() {
-    controller.listAllFavoriteHeros();
+    controller.getCharacterDataWrapper();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Observer(
         builder: (_) {
-          if (controller.loading) {
+          print('LOAFIN${controller.loading}');
+          if (controller.loading || controller.characterFavorited == null) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -31,6 +33,8 @@ class _FavoritePageState
               itemCount: controller.characterFavorited.length,
               itemBuilder: (context, index) => HeroCardComponent(
                 character: controller.characterFavorited[index],
+                favoriteRepository: controller.repository,
+                refrash: controller.refrashList,
               ),
             );
           }

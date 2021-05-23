@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:marvel_heroes_flutter/app/shared/model/character.dart';
+import 'package:marvel_heroes_flutter/app/shared/model/favorite_hero.dart';
+import 'package:marvel_heroes_flutter/app/shared/repositories/favorite/favorite_repository_interface.dart';
 
 class HeroCardComponent extends StatelessWidget {
   final Character character;
+  final IFavoriteRepository favoriteRepository;
+  final Function refrash;
 
-  const HeroCardComponent({Key? key, required this.character})
+  const HeroCardComponent(
+      {Key? key,
+      required this.character,
+      required this.favoriteRepository,
+      required this.refrash})
       : super(key: key);
 
   @override
@@ -77,9 +85,17 @@ class HeroCardComponent extends StatelessWidget {
     return ButtonBar(
       children: [
         IconButton(
+          color: character.favorited ? Colors.red : Colors.white,
           icon: Icon(Icons.favorite),
           onPressed: () {
-            print('Favoritou');
+            print(character.favoritedFirebaseId);
+            if (character.favorited) {
+              favoriteRepository.delete(character.favoritedFirebaseId!);
+            } else {
+              favoriteRepository
+                  .save(FavoriteHero(favoriteHeroId: character.id));
+            }
+            refrash();
           },
         )
       ],
